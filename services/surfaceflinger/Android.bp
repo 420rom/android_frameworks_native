@@ -14,6 +14,7 @@ cc_defaults {
 cc_defaults {
     name: "libsurfaceflinger_defaults",
     defaults: [
+        "disable_postrender_cleanup_defaults",
         "surfaceflinger_defaults",
         "surfaceflinger_qcom_ext_defaults",
     ],
@@ -38,6 +39,7 @@ cc_defaults {
         "android.hardware.power@1.3",
         "android.hardware.power-cpp",
         "libbase",
+        "libbfqio",
         "libbinder",
         "libbufferhubqueue",
         "libcutils",
