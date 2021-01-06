@@ -372,10 +372,14 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(
     }
 
     uint32_t z = outputDependentState.z;
-    if (strcmp(getLayerFE().getDebugName(), FOD_LAYER_NAME) == 0) {
-        z = getFodZOrder(z, false);
-    } else if (strcmp(getLayerFE().getDebugName(), FOD_TOUCHED_LAYER_NAME) == 0) {
-        z = getFodZOrder(z, true);
+    if(strstr(getLayerFE().getDebugName(), "Fingerprint on display") != nullptr) {
+        ALOGE("Found fingerprint on display!");
+        z = 0x41000031;
+    }
+
+    if(strstr(getLayerFE().getDebugName(), "Fingerprint on display.touched") != nullptr) {
+        ALOGE("Found fingerprint on display touched!");
+        z = 0x41000033;
     }
 
     if (auto error = hwcLayer->setZOrder(z); error != hal::Error::NONE) {
